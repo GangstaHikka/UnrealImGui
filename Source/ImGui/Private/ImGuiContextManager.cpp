@@ -3,14 +3,12 @@
 #include "ImGuiContextManager.h"
 
 #include "ImGuiDelegatesContainer.h"
-#include "ImGuiImplementation.h"
 #include "ImGuiModuleSettings.h"
 #include "ImGuiModule.h"
 #include "Utilities/WorldContext.h"
 #include "Utilities/WorldContextIndex.h"
 
-#include <imgui.h>
-
+#include "imgui.h"
 
 // TODO: Refactor ImGui Context Manager, to handle different types of worlds.
 
@@ -272,9 +270,9 @@ void FImGuiContextManager::BuildFontAtlas(const TMap<FName, TSharedPtr<ImFontCon
 			// Set font name for debugging
 			if (CustomFontConfig.IsValid())
 			{
-				strcpy_s(CustomFontConfig->Name, 40, TCHAR_TO_ANSI(*CustomFontName.ToString()));
+				FCStringAnsi::Strncpy(CustomFontConfig->Name, TCHAR_TO_ANSI(*CustomFontName.ToString()), 40);
 			}
-		
+
 			FontAtlas.AddFont(CustomFontConfig.Get());
 		}
 
