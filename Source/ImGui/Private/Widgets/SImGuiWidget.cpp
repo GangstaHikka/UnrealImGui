@@ -583,10 +583,9 @@ void SImGuiWidget::UpdateCanvasSize()
 		if (auto* ContextProxy = ModuleManager->GetContextManager().GetContextProxy(ContextIndex))
 		{
 			CanvasSize = MinCanvasSize;
-			if (bAdaptiveCanvasSize && GameViewport.IsValid())
+			if (bAdaptiveCanvasSize)
 			{
-				FVector2D ViewportSize;
-				GameViewport->GetViewportSize(ViewportSize);
+				const FVector2D ViewportSize = GetCachedGeometry().GetAbsoluteSize();
 				CanvasSize = MaxVector(CanvasSize, ViewportSize);
 			}
 			else
