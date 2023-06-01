@@ -20,6 +20,7 @@
 #include <Framework/Application/SlateApplication.h>
 #include <GameFramework/GameUserSettings.h>
 #include <SlateOptMacros.h>
+#include <UnrealClient.h>
 #include <Widgets/SViewport.h>
 
 #include <utility>
