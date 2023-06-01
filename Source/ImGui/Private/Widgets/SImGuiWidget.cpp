@@ -465,6 +465,11 @@ void SImGuiWidget::UpdateInputState()
 		}
 		else
 		{
+			// Disable all input
+			InputHandler->OnKeyboardInputDisabled();
+			InputHandler->OnGamepadInputDisabled();
+			InputHandler->OnMouseInputDisabled();
+
 			ReturnFocus();
 		}
 	}
