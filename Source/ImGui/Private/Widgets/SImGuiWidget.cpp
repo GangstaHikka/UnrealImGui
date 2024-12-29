@@ -20,6 +20,7 @@
 #include <Framework/Application/SlateApplication.h>
 #include <GameFramework/GameUserSettings.h>
 #include <SlateOptMacros.h>
+#include <UnrealClient.h>
 #include <Widgets/SViewport.h>
 
 #include <utility>
@@ -464,6 +465,11 @@ void SImGuiWidget::UpdateInputState()
 		}
 		else
 		{
+			// Disable all input
+			InputHandler->OnKeyboardInputDisabled();
+			InputHandler->OnGamepadInputDisabled();
+			InputHandler->OnMouseInputDisabled();
+
 			ReturnFocus();
 		}
 	}
@@ -582,10 +588,9 @@ void SImGuiWidget::UpdateCanvasSize()
 		if (auto* ContextProxy = ModuleManager->GetContextManager().GetContextProxy(ContextIndex))
 		{
 			CanvasSize = MinCanvasSize;
-			if (bAdaptiveCanvasSize && GameViewport.IsValid())
+			if (bAdaptiveCanvasSize)
 			{
-				FVector2D ViewportSize;
-				GameViewport->GetViewportSize(ViewportSize);
+				const FVector2D ViewportSize = GetCachedGeometry().GetAbsoluteSize();
 				CanvasSize = MaxVector(CanvasSize, ViewportSize);
 			}
 			else
